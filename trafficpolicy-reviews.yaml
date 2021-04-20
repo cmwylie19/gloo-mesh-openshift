@@ -1,0 +1,28 @@
+# This this forces v2 of reviews with black stars
+apiVersion: networking.mesh.gloo.solo.io/v1
+kind: TrafficPolicy
+metadata:
+  namespace: gloo-mesh
+  name: reviews
+spec:
+  sourceSelector:
+  - kubeWorkloadMatcher:
+      namespaces:
+      - default
+  destinationSelector:
+  - kubeServiceRefs:
+      services:
+        - clusterName: mgmt-cluster
+          name: reviews
+          namespace: default
+  policy:
+    trafficShift:
+      destinations:
+        - kubeService:
+            clusterName: mgmt-cluster
+            name: reviews
+            namespace: default
+            subset:
+              version: v2
+          weight: 100
+        

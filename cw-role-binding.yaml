@@ -1,0 +1,14 @@
+apiVersion: rbac.enterprise.mesh.gloo.solo.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app: gloo-mesh
+  name: admin-role-binding2
+  namespace: gloo-mesh
+spec:
+  roleRef:
+    name: admin-role
+    namespace: gloo-mesh
+  subjects:
+    - kind: User
+      name: IAM#casey.wylie@solo.io
