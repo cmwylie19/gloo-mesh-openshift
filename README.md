@@ -36,21 +36,6 @@ metadata:
 EOF
 ```  
 
-
-## Setup Istio Configs
-`oc adm policy add-scc-to-group anyuid system:serviceaccounts:istio-system`  
-`oc adm policy add-scc-to-group privileged system:serviceaccounts:default`  
-`oc adm policy add-scc-to-group anyuid system:serviceaccounts:default`
-
-```
-$ cat <<EOF | oc -n gloo-mesh create -f -
-apiVersion: "k8s.cni.cncf.io/v1"
-kind: NetworkAttachmentDefinition
-metadata:
-  name: istio-cni
-EOF
-```
-
 <!-- ```
 kind: SecurityContextConstraints
 apiVersion: v1
