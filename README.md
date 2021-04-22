@@ -1,8 +1,7 @@
 # Running Gloo Mesh on OpenShift
 _Running Gloo Mesh on OpenShift._
 
-
-
+MGMT_CONTEXT=default/c100-e-us-east-containers-cloud-ibm-com:30821/IAM#casey.wylie@solo.io
 ## Installing Gloo Mesh
 Assign the license key.   
 ```
@@ -21,12 +20,12 @@ helm install gloo-mesh-enterprise gloo-mesh-enterprise/gloo-mesh-enterprise --na
 ```
 
 ## Preparing OpenShift for Istio/Gloo Mesh
-`oc adm policy add-scc-to-group anyuid system:serviceaccounts:gloo-mesh`  
-`oc adm policy add-scc-to-user anyuid -z gloo-mesh`  
-`oc adm policy add-scc-to-group privileged system:serviceaccounts:gloo-mesh`  
-`oc adm policy add-scc-to-group anyuid system:serviceaccounts:istio-system`  
-`oc adm policy add-scc-to-group privileged system:serviceaccounts:default`  
-`oc adm policy add-scc-to-group anyuid system:serviceaccounts:default`  
+oc adm policy add-scc-to-group anyuid system:serviceaccounts:gloo-mesh  
+oc adm policy add-scc-to-user anyuid -z gloo-mesh  
+oc adm policy add-scc-to-group privileged system:serviceaccounts:gloo-mesh  
+oc adm policy add-scc-to-group anyuid system:serviceaccounts:istio-system  
+oc adm policy add-scc-to-group privileged system:serviceaccounts:default  
+oc adm policy add-scc-to-group anyuid system:serviceaccounts:default  
 ```
 cat <<EOF | oc -n default create -f -
 apiVersion: "k8s.cni.cncf.io/v1"
