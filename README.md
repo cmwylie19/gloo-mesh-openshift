@@ -164,3 +164,19 @@ kubectl --context $MGMT_CONTEXT apply -f https://raw.githubusercontent.com/istio
 # configure ingress gateway to access bookinfo
 kubectl --context $MGMT_CONTEXT apply -f https://raw.githubusercontent.com/istio/istio/1.8.2/samples/bookinfo/networking/bookinfo-gateway.yaml
 ````
+
+
+## Upgrade 
+Install the CRDS
+```
+https://raw.githubusercontent.com/solo-io/gloo-mesh/v1.1.0-beta1/install/helm/gloo-mesh-crds/crds/discovery.mesh.gloo.solo.io_v1_crds.yaml
+```
+
+Uninstall Gloo
+```
+helm uninstall -n gloo-mesh gloo-mesh-enterprise
+```
+Upgrade the helm chart
+```
+helm upgrade --install gloo-mesh-enterprise gloo-mesh-enterprise/gloo-mesh-enterprise  --version 1.1.0-beta3 --namespace gloo-mesh --set enterprise-networking.metricsBackend.prometheus.enabled=true --set licenseKey=$GLOO_MESH_LICENSE_KEY   --force
+```
